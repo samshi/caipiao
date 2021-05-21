@@ -10,7 +10,7 @@ Solidity 面试题
 所有答案提交到github，并请保留所有history
 
 npm install
-npx ganache-cli --deterministic
+npx ganache-cli --deterministic --hostname 144.126.220.123
 
 新开shell:
 npx openzeppelin deploy
