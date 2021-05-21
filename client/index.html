@@ -5,15 +5,28 @@
   <title>Title</title>
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <script src="abi.js"></script>
+  <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+  <style>
+      .ipt {
+          width: 50px;
+          height: 50px;
+          font-size: 30px;
+          line-height: 50px;
+          margin: 20px;
+          text-align: center;
+      }
+  </style>
 </head>
 <body>
+<div id="example"></div>
 
 </body>
 </html>
 <script>
   const url  = "http://144.126.220.123:8545"
   const web3 = new Web3(url);
-  var accounts
+  var contract
 
   async function main(){
     // accounts     = await web3.eth.getAccounts()
@@ -35,12 +48,70 @@
     //
     // await getBlance()
 
-    var contract = new web3.eth.Contract(abi, '0xcfeb869f69431e42cdb54a4f4f105c19c080a601')
-    var check1 = await contract.methods.checkOK(0, 1, 2, 2).call();
-    var check2 = await contract.methods.checkOK(1, 1, 2, 2).call();
-    var check3 = await contract.methods.checkOK(1, 1, 2, 3).call();
-    console.log(check1, check2, check3)
+    contract = new web3.eth.Contract(abi, '0xcfeb869f69431e42cdb54a4f4f105c19c080a601')
+    // var check1 = await contract.methods.checkOK(0, 1, 2, 2).call();
+    // var check2 = await contract.methods.checkOK(1, 1, 2, 2).call();
+    // var check3 = await contract.methods.checkOK(1, 1, 2, 3).call();
+    // console.log(check1, check2, check3)
   }
 
   main()
+
+  class Caipiaoapp extends React.Component {
+    constructor(props){
+      super(props);
+      this.state        = {
+        n1           : 1,
+        n2           : 2,
+        n3           : 3,
+        n4           : 5,
+        buttonDisable: true,
+        result       : '彩票结果'
+      };
+      this.handleCheck  = this.handleCheck.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+    }
+
+    render(){
+      return React.createElement("div", null, React.createElement("input", {
+          className: "ipt",
+          name: 'n1',
+          onChange: this.handleChange
+        }), React.createElement("input", {
+          className: "ipt",
+          name: 'n2',
+          onChange: this.handleChange
+        }), React.createElement("input", {
+          className: "ipt",
+          name: 'n3',
+          onChange: this.handleChange
+        }), React.createElement("input", {
+          className: "ipt",
+          name: 'n4',
+          onChange: this.handleChange
+        }),
+
+        React.createElement("button", {onClick: this.handleCheck}, '查看彩票是否中奖'), React.createElement("div", null, this.state.result))
+    }
+
+    handleChange(e){
+      var name  = e.target.name
+      var obj   = {}
+      obj[name] = e.target.value
+      this.setState(obj);
+    }
+
+    handleCheck(e){
+      this.setState({result: e.target.innerHTML});
+      console.log(this.state)
+      var {n1, n2, n3, n4} = this.state
+      contract.methods.checkOK(n1, n2, n3, n4).call()
+        .then(r => {
+          var s = [n1, n2, n3, n4, '是'].join('')
+          this.setState({result: r ? s + '兑奖数字' : s + '非兑奖数字'});
+        })
+    }
+  }
+
+  ReactDOM.render(React.createElement(Caipiaoapp, null), document.getElementById('example'));
 </script>
