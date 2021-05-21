@@ -8,3 +8,10 @@ Solidity 面试题
         - 3个数字顺序符合
 - web3.js的一个简单React的兑奖页面
 所有答案提交到github，并请保留所有history
+
+npm install
+npx ganache-cli --deterministic
+
+新开shell:
+npx openzeppelin deploy
+选upgradeable
