@@ -1,0 +1,25 @@
+{
+  "name": "solidity-caipiao",
+  "version": "1.0.0",
+  "description": "Solidity 面试题",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/samshi2000/caipiao.git"
+  },
+  "author": "Sam SHI",
+  "license": "ISC",
+  "dependencies": {
+    "@openzeppelin/contract-loader": "^0.6.2",
+    "@openzeppelin/upgrades": "^2.8.0",
+    "web3": "^1.2.2"
+  },
+  "devDependencies": {
+    "@openzeppelin/cli": "^2.8.2",
+    "ganache-cli": "^6.12.2"
+  }
+}
+
