@@ -15,3 +15,5 @@ npx ganache-cli --deterministic --hostname 144.126.220.123
 新开shell:
 npx openzeppelin deploy
 选upgradeable
+
+在线demo: http://arweave.hdcafe.com/client/index.html
