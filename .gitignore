@@ -3,3 +3,4 @@
 node_modules
 package-lock.json
 contracts/.gitkeep
+client/node_modules
